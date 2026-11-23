@@ -1,0 +1,2 @@
+# QuickRead AI Overlay package
+

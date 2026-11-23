@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Local runtime state & browser profiles (never commit)
+.appdata/
+last_snip*.png
+state.json
+quickread.lock
+
+# Tests, logs, scratch & archive (kept local)
+tests/
+*.log
+*_junit*.xml
+pip_list.txt
+scratch_*.py
+scratch_*.txt
+_archive/
+
+# IDE, OS & local agent rules
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+GEMINI.md
