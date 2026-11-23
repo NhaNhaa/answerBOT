@@ -17,13 +17,20 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QUrl, QTimer, QThread, pyqtSignal, QObject
 from PyQt6.QtNetwork import QNetworkCookie
-from PyQt6.QtWebEngineWidgets import QWebEngineView
-from PyQt6.QtWebEngineCore import QWebEngineProfile, QWebEnginePage, QWebEngineScript
+try:
+    from PyQt6.QtWebEngineWidgets import QWebEngineView
+    from PyQt6.QtWebEngineCore import QWebEngineProfile, QWebEnginePage, QWebEngineScript
+except ImportError:
+    QWebEngineView = None
+    QWebEngineProfile = None
+    QWebEnginePage = object
+    QWebEngineScript = None
 
 import src.config as config
 from .config import (
     PROFILE_DIR, GOOGLE_AI_MODE_HOME, DEFAULT_IMAGE_PROMPT,
-    LAST_SNIP_FILE, GEMINI_API_KEY_ENV, LOGIN_AUTOCLOSE_MS
+    LAST_SNIP_FILE, GEMINI_API_KEY_ENV, GEMINI_MODEL_ENV,
+    DEFAULT_GEMINI_MODEL, LOGIN_AUTOCLOSE_MS
 )
 
 SESSION_COOKIE_NAMES = {"SID", "__Secure-1PSID"}
@@ -803,9 +810,10 @@ class _GeminiRequestThread(QThread):
         self.b64_png = self.b64_pngs[0] if self.b64_pngs else None
 
     def run(self):
+        model = os.environ.get(GEMINI_MODEL_ENV, DEFAULT_GEMINI_MODEL).strip() or DEFAULT_GEMINI_MODEL
         url = (
             "https://generativelanguage.googleapis.com/v1beta/models/"
-            f"gemini-2.0-flash:generateContent?key={self.api_key}"
+            f"{model}:generateContent?key={self.api_key}"
         )
         parts = []
         for b64 in self.b64_pngs:
@@ -1024,6 +1032,11 @@ class GoogleAIModeWebBackend(AIBackend):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        if QWebEngineView is None or QWebEngineProfile is None:
+            raise RuntimeError(
+                "PyQt6-WebEngine is required for the embedded web backend. "
+                "Install it with: python -m pip install PyQt6-WebEngine"
+            )
         self._container = QWidget()
         self._container.setStyleSheet("background: transparent;")
         layout = QVBoxLayout(self._container)
