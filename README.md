@@ -47,3 +47,48 @@ To use the official Gemini API instead of Chrome, set `GEMINI_API_KEY` before la
 $env:GEMINI_API_KEY = "your-api-key"
 python main.py
 ```
+
+## Guideline
+
+Run `python main.py`, sign in to your Google account in the Chrome window that opens, and wait a second until it closes into the background.
+
+### Step 1
+![Floating dot on the edge of the screen](images/01.png)
+
+**Explanation:** Once you are signed in, a small grey circle appears on the edge of your screen — drag it wherever you want, or left-click it to start snipping a question.
+
+### Step 2
+![Done 1/5 button below the floating dot](images/02.png)
+
+**Explanation:** Drag a box over the question to capture it, and a small `Done 1/5` button pops up below the circle so you can either add up to 5 snips or click `Done` right away.
+
+### Step 3
+![Close-up of the dot and Done 1/5 button](images/03.png)
+
+**Explanation:** Here is a closer look at the circle and the `Done 1/5` button underneath — click the circle again if your question needs more screenshots, or click `Done` to send what you have.
+
+### Step 4
+![Answer box opening while sending the image](images/04.png)
+
+**Explanation:** After you click `Done`, the light see-through answer box opens beside the circle while it sends your screenshot and thinks.
+
+### Step 5
+![Answer displayed with Pin turned on](images/05.png)
+
+**Explanation:** Your answer appears inside the box (hover and scroll if it is long), and clicking the Pin icon below the circle turns it solid black so the box stays open even when you click elsewhere on the screen.
+
+### Step 6
+![Star turned on with infinity counter](images/06.png)
+
+**Explanation:** Clicking the Star icon above the circle turns it solid black and switches the top-left counter to `∞`, so this same answer stays saved no matter how many times you hide and reopen the box.
+
+### Step 7
+![Top-left 2/2 reopen counter with Star and Pin off](images/07.png)
+
+**Explanation:** When the Star is off, the `2/2` number in the top-left shows how many times you can click the circle to hide and reopen the same answer (`2/2` → `1/2` → `0/2`) before the next click starts a new snip.
+
+**NOTE:**
+- **Focus on the `Answer:` section at the top** — every reply has two parts (`Answer:` on top and `Explanation:` below), so you can just focus on the `Answer:` part.
+- **Left-click only** — right-clicking does nothing on the circle, icons, or snip screen (do a quick tiny left-click without dragging to cancel a snip).
+- **Outside clicks close the box automatically** — turn on **Pin** to keep it open while you click elsewhere, or turn on **Star** (`∞`) to keep the same answer saved every time you close and reopen it.
+- **No copying or selecting inside the answer box** — clicks pass straight through to the app behind it (just hover and scroll to read long answers).
